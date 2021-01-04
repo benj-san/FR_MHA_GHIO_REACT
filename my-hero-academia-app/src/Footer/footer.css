@@ -1,0 +1,9 @@
+.app-footer{
+    position: fixed;
+    bottom: 5vh;
+    left: 0;
+    box-sizing: border-box;
+    padding: 3vh 2vw;
+    background-color: purple;
+    width: 100vw;
+}

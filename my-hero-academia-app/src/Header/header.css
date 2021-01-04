@@ -1,0 +1,6 @@
+.app-header{
+    box-sizing: border-box;
+    width: 100vw;
+    padding: 5vh 2vw;
+    background-color: orange;
+}
