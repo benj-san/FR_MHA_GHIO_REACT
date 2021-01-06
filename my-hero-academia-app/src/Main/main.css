@@ -5,6 +5,13 @@
     box-sizing: border-box;
 }
 
+.app-detail{
+    width: 100vw;
+    padding: 5vh 2vw;
+    background-color: red;
+    box-sizing: border-box;
+}
+
 .characterList{
     max-width: 100vw;
     display: flex;

@@ -1,5 +1,6 @@
 import './about.css';
 import {ABOUT} from './../Data/ABOUT'
+import BackButton from './../BackButton/BackButton';
 
 //Ici on développera une fonction composant sections qui intégrera au site autant de sections qu'il y a de paragraphes dans notre fichier de données,
 //La fonction prendra alors un paramètre d'entrée, que nous nommerons sections qui correspondra à l'entrée de fichier sur lequel on souhaite boucler
@@ -26,6 +27,7 @@ function About() {
         <main className="app-about">
             <h1>En savoir plus sur ce site</h1>
             <Sections sections = {ABOUT}/>
+            < BackButton />
         </main>
     );
 }

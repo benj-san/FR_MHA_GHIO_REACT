@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './main.css';
 import { useParams, Link } from "react-router-dom";
+import BackButton from './../BackButton/BackButton';
 
 //Ici nous allons créer une fonction qui permettra de récupérer l'API voulue (ici My Hero Academia api : https://myheroacademiaapi.com/)
 //Nous utiliserons l'apu fetch afin de récupérer les données de l'API
@@ -88,14 +89,15 @@ function CharacterDetail () {
 
     const [loading, characterCards] = useFetch('https://myheroacademiaapi.com/api/character?affiliation=U.A')
 
-    if(loading) return 'Page is loading ...'
+    if(loading) return 'Here comes a new challenger !'
 
     const characterFound = characterCards.filter(characterCard => characterCard.id === idCharacter);
 
     return (
-        <main className="app-main">
+        <main className="app-detail">
             <h1>Personnage : {characterFound[0].name}</h1>
             <article>{characterFound[0].description}</article>
+            < BackButton />
         </main>
     )
 }
