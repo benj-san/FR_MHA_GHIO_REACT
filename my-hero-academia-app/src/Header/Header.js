@@ -1,11 +1,10 @@
 import './header.css';
+import { Link } from "react-router-dom";
 
 function Header() {
     return (
         <header className="app-header">
-            <button>
-                future website logo
-            </button>
+            <Link to="/">Home</Link>
         </header>
     );
 }
