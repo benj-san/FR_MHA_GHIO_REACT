@@ -68,30 +68,34 @@ function useFetch (url) {
 
 //Une fois la fonction de récupération créée, nous allons implémenter une fonction composant afin de transformer en liste affichable en html les données obtenues
 //La fonction javascript "map" est ici très utile afin de créér rapidement de multiples lignes pour chaque personnage récupéré
+//Afin de proposer des liens dynamiques, on va utiliser le nom de chaque personnage afin de l'insérer dans l'url, pour cela on transformera tous les espaces en traits d'unions
 function CharacterList () {
     const [loading, characterCards] = useFetch('https://myheroacademiaapi.com/api/character?affiliation=U.A')
 
     if(loading) return 'Page is loading ...'
 
     return <ul className="characterList">
-        {characterCards.map( characterCard => <li key = {characterCard.id}>
-            <Link to={`/character/${characterCard.id}`}>{characterCard.name}</Link>
+        {characterCards.map( characterCard => <li key = {characterCard.id} id={`character-${characterCard.id}`} >
+            <Link to={`/character/${characterCard.name.replace(' ', '-')}`}>{characterCard.name}</Link>
             <img src={characterCard.pictures[Math.floor(Math.random() * (characterCard.pictureNumber - 0 + 1))]} alt={characterCard.name}/>
         </li>)}
     </ul>
 }
 
+//Le composant detail est un peu particulier car, lui, se doit d'être dynamique, afin de rendre les informations du personnage convenu lors du click sur
+//ce dernier, on utilise alors le useParams proposé par REACT ROUTER afin d'obtenir le nom de l'url séléctionnée, puis on déliera le trait d'union en le
+//transformant en espace, ainsi on pourra retrouver le nom du personnage et filtrer afin de retrouver toutes les informations concernant ce dernier
 function CharacterDetail () {
 
-    let { id } = useParams();
+    let { name } = useParams();
 
-    const idCharacter = parseInt(id)
+    const CharacterName = name.replace('-', ' ')
 
     const [loading, characterCards] = useFetch('https://myheroacademiaapi.com/api/character?affiliation=U.A')
 
     if(loading) return 'Here comes a new challenger !'
 
-    const characterFound = characterCards.filter(characterCard => characterCard.id === idCharacter);
+    const characterFound = characterCards.filter(characterCard => characterCard.name === CharacterName);
 
     return (
         <main className="app-detail">
