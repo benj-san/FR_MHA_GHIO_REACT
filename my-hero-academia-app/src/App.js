@@ -9,6 +9,8 @@ import {
   Route
 } from "react-router-dom";
 
+//Une fois importé, le module REACT ROUTER nous permet de déclarer des routes afin de modifier automatiquement l'url, permettre à l'utilisateur d'avoir un fil
+//de navigation (boutons précedents etc) et de cabler ces routes sur le composant page vers lequel nous voulons le renvoyer
 function App() {
   return (
     <div className="app">
