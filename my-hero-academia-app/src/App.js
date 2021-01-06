@@ -1,7 +1,7 @@
 import './App.css';
 import Header from './Header/Header';
 import About from './About/About';
-import Main from './Main/Main';
+import { Main, CharacterDetail } from './Main/Main';
 import Footer from './Footer/Footer';
 import {
   BrowserRouter as Router,
@@ -23,6 +23,7 @@ function App() {
           <Route exact path="/about">
             <About />
           </Route>
+          <Route path="/character/:id" children={<CharacterDetail />} />
         </Switch>
         <Footer />
       </Router>
