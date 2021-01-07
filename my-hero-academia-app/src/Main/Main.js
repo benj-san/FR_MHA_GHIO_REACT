@@ -74,12 +74,14 @@ function CharacterList () {
 
     if(loading) return 'Page is loading ...'
 
-    return <ul className="characterList">
-        {characterCards.map( characterCard => <li key = {characterCard.id} id={`character-${characterCard.id}`} >
-            <Link to={`/character/${characterCard.name.replace(' ', '-')}`}>{characterCard.name}</Link>
-            <img src={characterCard.pictures[Math.floor(Math.random() * (characterCard.pictureNumber - 0 + 1))]} alt={characterCard.name}/>
-        </li>)}
-    </ul>
+    return (
+        <ul className="characterList">
+            {characterCards.map( characterCard => <li key = {characterCard.id} id={`character-${characterCard.id}`} >
+                <Link to={`/character/${characterCard.name.replace(' ', '-')}`}>{characterCard.name}</Link>
+                <img src={characterCard.pictures[Math.floor(Math.random() * (characterCard.pictureNumber - 0 + 1))]} alt={characterCard.name}/>
+            </li>)}
+        </ul>
+    )
 }
 
 //Le composant detail est un peu particulier car, lui, se doit d'être dynamique, afin de rendre les informations du personnage convenu lors du click sur
