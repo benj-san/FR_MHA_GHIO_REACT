@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './main.css';
 import { useParams, Link } from "react-router-dom";
 import BackButton from './../BackButton/BackButton';
+import { dynamicDisplay } from './../SearchBar/SearchBar';
+
 
 //Ici nous allons créer une fonction qui permettra de récupérer l'API voulue (ici My Hero Academia api : https://myheroacademiaapi.com/)
 //Nous utiliserons l'apu fetch afin de récupérer les données de l'API
@@ -21,6 +23,7 @@ function useFetch (url) {
         //Ici le fait d'effectuer cette fonction d emanière asynchrone permet de ne pas géner le temps de chargement de la page durant la 
         //récupération de données, aussi, await (ne s'utilise que dans une fonction de type asynchrone) permet de mettre en pause le traitement
         // de la donnée et de la reprendre lorsque désirée.
+        // !!!IMPORTANT!!! Un seul useEffect par fonction, et la methode async s'emploie au départ d'une fonction
         (async () => {
             const response = await fetch(url)
             const dataFetched = await response.json()
@@ -58,6 +61,9 @@ function useFetch (url) {
                 setState(status => ({...status, loading: false}))
             }
         })()
+
+        //On affiche ou non la barre de recherche selon le chemin du site ou l'on se situe :
+        dynamicDisplay()
     }, [])
 
     return [

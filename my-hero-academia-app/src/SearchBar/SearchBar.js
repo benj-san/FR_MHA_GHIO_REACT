@@ -1,6 +1,10 @@
 import './searchBar.css';
 import React, { useState } from 'react';
 
+function dynamicDisplay () {
+        window.location.pathname !== "/" ? document.getElementById('header-searchBar').className = "hidden" : document.getElementById('header-searchBar').className = "" ;
+}
+
 function filterTextChanged (filterText) {
 
     const textFiltered = filterText
@@ -10,7 +14,7 @@ function filterTextChanged (filterText) {
 function SearchBar() {
 
     const [state, setState] = useState({
-        filterText : "plus Ultra"
+        filterText : ""
     })
 
     function textFilterChanged(e){
@@ -22,8 +26,8 @@ function SearchBar() {
     filterTextChanged(state.filterText)
 
     return (
-        <input value={state.filterText} type="text" placeholder= "search for a hero" onChange={textFilterChanged} />
+        <input id="header-searchBar" value={state.filterText} type="text" placeholder= "search for a hero" onChange={textFilterChanged} />
         )
 }
 
-export {filterTextChanged, SearchBar}
+export {filterTextChanged, SearchBar, dynamicDisplay}
