@@ -26,7 +26,7 @@ function App() {
           <Route exact path="/about">
             <About />
           </Route>
-          <Route path="/character/:name" children={<CharacterDetail />} />
+          <Route path="/:name" children={<CharacterDetail />} />
         </Switch>
         <Footer />
       </Router>

@@ -82,8 +82,8 @@ function CharacterList () {
 
     return (
         <ul className="characterList row gx-4 gy-4">
-            {characterCards.map( characterCard => <li className="col-4 position-relative" key = {characterCard.id} id={`character-${characterCard.id}`} >
-                <Link  to={`/character/${characterCard.name.replace(' ', '-')}`}>
+            {characterCards.map( characterCard => <li className="col-12 col-md-6 col-lg-4 position-relative" key = {characterCard.id} id={`character-${characterCard.id}`} >
+                <Link  to={`/${characterCard.name.replace(' ', '-')}`}>
                     <img className="position-relative" src={characterCard.pictures[Math.floor(Math.random() * (characterCard.pictureNumber - 0 + 1))]} alt={characterCard.name}/>
                     <h2 className="character-name position-absolute border-bottom" >{characterCard.name}</h2>
                 </Link>
@@ -115,14 +115,14 @@ function CharacterDetail () {
             </div>
             <article className="row">
                 <div className="character-description col-12 mb-5">{characterFound[0].description}</div>
-                <div className="character-details col-5">
+                <div className="character-details col-sm-5 col-12">
                     Alias : {characterFound[0].alias ? characterFound[0].alias : "Unknown"} <br/>
                     Japanese name : {characterFound[0].japaneseName ? characterFound[0].japaneseName : "Unknown"} <br/>
                     Power : {characterFound[0].power ? characterFound[0].power : "Unknown"} <br/>
                     Occupation : {characterFound[0].occupation ? characterFound[0].occupation : "Unknown"} <br/>
                     Status : {characterFound[0].status ? characterFound[0].status : "Unknown"} <br/>
                 </div>
-                <div className="character-details col-5 offset-2">
+                <div className="character-details col-12 col-sm-5 offset-sm-2">
                     Blood Type : {characterFound[0].bloodType ? characterFound[0].bloodType : "Unknown"} <br/>
                     Gender : {characterFound[0].gender ? characterFound[0].gender : "Unknown"} <br/>
                     height : {characterFound[0].height ? characterFound[0].height : "Unknown"} <br/>
@@ -130,7 +130,7 @@ function CharacterDetail () {
                     hair : {characterFound[0].hair ? characterFound[0].hair : "Unknown"} <br/>
                 </div>
                 <ul className="character-pics row">
-                    {characterFound[0].pictures.map((characterPic, i) => <li className="col-4 gx-5 gy-5" key={i}><img src={characterPic} alt=""/></li>)}
+                    {characterFound[0].pictures.map((characterPic, i) => <li className="col-12 col-sm-6 col-lg-4 gx-5 gy-5" key={i}><img src={characterPic} alt=""/></li>)}
                 </ul>
             </article>
             < BackButton />
