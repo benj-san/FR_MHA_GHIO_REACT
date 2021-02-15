@@ -2,10 +2,10 @@ import './searchBar.css';
 import React, { useState } from 'react';
 
 function dynamicDisplay () {
-        window.location.pathname !== "/" ? document.getElementById('header-searchBar').className = "hidden" : document.getElementById('header-searchBar').className = "" ;
+        window.location.pathname !== "/" ? document.getElementById('header-searchBar').className = "d-none" : document.getElementById('header-searchBar').className = "form-control rounded-pill" ;
 }
 
-function filterTextChanged (filterText) {
+function filterTextChanged (filterText = "") {
 
     const textFiltered = filterText
     return textFiltered
@@ -21,12 +21,17 @@ function SearchBar() {
         setState({
             filterText : e.target.value
         })
+
+        //Ici on modifiera l'affichage du tableau de personnages avant de le renvoyer au main
+
     }
 
     filterTextChanged(state.filterText)
 
     return (
-        <input id="header-searchBar" value={state.filterText} type="text" placeholder= "search for a hero" onChange={textFilterChanged} />
+        <div className="col-3 offset-8 app-searchbar">
+            <input id="header-searchBar" value={state.filterText} type="text" placeholder= "search for a hero" onChange={textFilterChanged} />
+        </div>
         )
 }
 

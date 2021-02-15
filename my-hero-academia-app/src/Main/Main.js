@@ -35,8 +35,8 @@ function useFetch (url) {
                     {'id' : charaId, 
                     'name' : character.name, 
                     'alias' : character.alias, 
-                    'japanese name' : character.kanji,
-                    'blood type' : character.bloodtype,
+                    'japaneseName' : character.kanji,
+                    'bloodType' : character.bloodtype,
                     'gender' : character.gender,
                     'description' : character.description,
                     'power' : character.quirk,
@@ -53,7 +53,6 @@ function useFetch (url) {
                 setState({
                 charactersList: characterProperList,
 
-
                 loading: false
             })
             } else {
@@ -64,6 +63,7 @@ function useFetch (url) {
 
         //On affiche ou non la barre de recherche selon le chemin du site ou l'on se situe :
         dynamicDisplay()
+
     }, [])
 
     return [
@@ -81,10 +81,12 @@ function CharacterList () {
     if(loading) return 'Page is loading ...'
 
     return (
-        <ul className="characterList">
-            {characterCards.map( characterCard => <li key = {characterCard.id} id={`character-${characterCard.id}`} >
-                <Link to={`/character/${characterCard.name.replace(' ', '-')}`}>{characterCard.name}</Link>
-                <img src={characterCard.pictures[Math.floor(Math.random() * (characterCard.pictureNumber - 0 + 1))]} alt={characterCard.name}/>
+        <ul className="characterList row gx-4 gy-4">
+            {characterCards.map( characterCard => <li className="col-4 position-relative" key = {characterCard.id} id={`character-${characterCard.id}`} >
+                <Link  to={`/character/${characterCard.name.replace(' ', '-')}`}>
+                    <img className="position-relative" src={characterCard.pictures[Math.floor(Math.random() * (characterCard.pictureNumber - 0 + 1))]} alt={characterCard.name}/>
+                    <h2 className="character-name position-absolute border-bottom" >{characterCard.name}</h2>
+                </Link>
             </li>)}
         </ul>
     )
@@ -106,9 +108,31 @@ function CharacterDetail () {
     const characterFound = characterCards.filter(characterCard => characterCard.name === CharacterName);
 
     return (
-        <main className="app-detail">
-            <h1>Personnage : {characterFound[0].name}</h1>
-            <article>{characterFound[0].description}</article>
+        <main className="app-detail container">
+            <div className="row position-relative">
+                <span className="yellow-effect position-absolute w-100"></span>
+                <h1 className="pt-2 pb-2 w-50 m-auto text-center mb-5 mt-5 border text-uppercase" >{characterFound[0].name}</h1>
+            </div>
+            <article className="row">
+                <div className="character-description col-12 mb-5">{characterFound[0].description}</div>
+                <div className="character-details col-5">
+                    Alias : {characterFound[0].alias ? characterFound[0].alias : "Unknown"} <br/>
+                    Japanese name : {characterFound[0].japaneseName ? characterFound[0].japaneseName : "Unknown"} <br/>
+                    Power : {characterFound[0].power ? characterFound[0].power : "Unknown"} <br/>
+                    Occupation : {characterFound[0].occupation ? characterFound[0].occupation : "Unknown"} <br/>
+                    Status : {characterFound[0].status ? characterFound[0].status : "Unknown"} <br/>
+                </div>
+                <div className="character-details col-5 offset-2">
+                    Blood Type : {characterFound[0].bloodType ? characterFound[0].bloodType : "Unknown"} <br/>
+                    Gender : {characterFound[0].gender ? characterFound[0].gender : "Unknown"} <br/>
+                    height : {characterFound[0].height ? characterFound[0].height : "Unknown"} <br/>
+                    eye : {characterFound[0].eye ? characterFound[0].eye : "Unknown"} <br/>
+                    hair : {characterFound[0].hair ? characterFound[0].hair : "Unknown"} <br/>
+                </div>
+                <ul className="character-pics row">
+                    {characterFound[0].pictures.map((characterPic, i) => <li className="col-4 gx-5 gy-5" key={i}><img src={characterPic} alt=""/></li>)}
+                </ul>
+            </article>
             < BackButton />
         </main>
     )
@@ -118,8 +142,11 @@ function CharacterDetail () {
 function Main() {
 
     return (
-        <main className="app-main">
-            <h1>Liste des personnages :</h1>
+        <main className="app-main container">
+            <div className="row position-relative">
+                <span className="yellow-effect position-absolute w-100"></span>
+                <h1 className="pt-2 pb-2 w-50 m-auto text-center mb-5 mt-5 border" >The Daily Heroes Gazette :</h1>
+            </div>
             <CharacterList />
         </main>
     )

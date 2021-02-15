@@ -10,7 +10,7 @@ function Sections (sections) {
 
     const sectionsArray =  sections.sections
 
-    return <ul className="section-container">
+    return <ul className="section-container row">
         {sectionsArray.map( section =>
             <li key = {section.id}>
                 <section>
@@ -31,8 +31,11 @@ function About() {
     }, [])
 
     return (
-        <main className="app-about">
-            <h1>En savoir plus sur ce site</h1>
+        <main className="app-about container">
+            <div className="row position-relative">
+                <span className="yellow-effect position-absolute w-100"></span>
+                <h1 className="pt-2 pb-2 w-50 m-auto text-center mb-5 mt-5 border" >About this website</h1>
+            </div>
             <Sections sections = {ABOUT}/>
             < BackButton />
         </main>

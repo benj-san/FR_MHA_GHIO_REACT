@@ -5,9 +5,13 @@ import { SearchBar } from './../SearchBar/SearchBar';
 
 function Header() {
     return (
-        <header className="app-header">
-            <Link to="/">Home</Link>
-            <SearchBar />
+        <header className="app-header container-fluid fixed-top border-bottom">
+            <div className="row align-items-center">
+                <Link to="/" className="col-1">
+                    <img className="header_logo" src="./home_icon.png" alt="My hero academia : Heroes list. Home"/>
+                </Link>
+                <SearchBar />
+            </div>
         </header>
     );
 }

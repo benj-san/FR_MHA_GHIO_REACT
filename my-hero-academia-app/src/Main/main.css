@@ -1,36 +1,40 @@
-.app-main{
-    width: 100vw;
-    padding: 5vh 2vw;
-    background-color: green;
+.app-main, .app-detail{
+    padding: 15vh 0 5vh;
     box-sizing: border-box;
 }
 
-.app-detail{
-    width: 100vw;
-    padding: 5vh 2vw;
-    background-color: red;
-    box-sizing: border-box;
+.characterList li a{
+    display: block;
 }
 
-.characterList{
-    max-width: 100vw;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    align-items: center;
+.characterList li a:hover img{
+    opacity: .9;
 }
 
-.characterList li{
-    box-sizing: border-box;
-    width: 25vw;
-    padding: 2vh 1vw;
-    margin-bottom: 2vw;
-    background-color: yellow;
-    list-style-type: none;
+.character-name{
+    right: -.8rem;
+    top: 20%;
+    z-index: 1;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 1rem;
 }
 
-.characterList li img{
+.characterList li a img, .character-pics li img{
     width: 100%;
-    height: 30vh;
-    object-fit: cover;
+    height: 33vh;
+    object-fit: contain;
+}
+
+.characterList li a img {
+    opacity: .3;
+    transition: opacity .4s, height .4s;
+    z-index: -1;
+}
+
+/* Charcter detail */
+.character-description{
+    font-size: 1.2rem;
+    font-weight: 800;
 }

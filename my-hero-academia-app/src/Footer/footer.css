@@ -1,10 +1,11 @@
 .app-footer{
     box-sizing: border-box;
     position: fixed;
-    bottom: 5vh;
-    left: 0;
+    bottom: 0;
+    right: 0;
+    left: initial;
     box-sizing: border-box;
-    padding: 3vh 2vw;
-    background-color: purple;
-    width: 100vw;
+    padding: 0 2vw 3vh 0;
+    z-index: 2;
+    width: max-content;
 }

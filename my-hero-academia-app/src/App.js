@@ -14,8 +14,9 @@ import {
 //On notera la présence d'urls dynamiques afin de pouvoir selectionner le profil du personnage, dans ce cas on utilise un path avec un placeholder 
 //puis on déclare l'enfant vers lequel le chemin mène, ici le composant page "characterDetail"
 function App() {
+
   return (
-    <div className="app">
+    <div className="app mw-100">
       <Router>
         <Header/>
         <Switch>
