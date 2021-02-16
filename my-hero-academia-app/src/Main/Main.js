@@ -16,7 +16,7 @@ function useFetch (url) {
     //de notre fonction
     const [state, setState] = useState({
     charactersList: [],
-    loading: true
+    loading: true,
     })
 
     useEffect(() => {
@@ -72,23 +72,57 @@ function useFetch (url) {
     ]
 }
 
+function SearchCharacter (props) {
+    return <input id="header-searchBar" value={props.filterText} type="text" placeholder= "search for a hero" onChange={props.textFilterChanged} />
+}
+
+function CharacterCards (props) {
+    return (
+    <React.Fragment>
+        {props.characterCards.map( characterCard =><li className="col-12 col-md-6 col-lg-4 position-relative" key = {characterCard.id} id={`character-${characterCard.id}`} >
+            <Link  to={`/${characterCard.name.replace(' ', '-')}`}>
+                <img className="position-relative" src={characterCard.pictures[Math.floor(Math.random() * (characterCard.pictureNumber - 0 + 1))]} alt={characterCard.name}/>
+                <h2 className="character-name position-absolute border-bottom" >{characterCard.name}</h2>
+            </Link>
+        </li>)}
+    </React.Fragment>
+    )
+}
+
 //Une fois la fonction de récupération créée, nous allons implémenter une fonction composant afin de transformer en liste affichable en html les données obtenues
 //La fonction javascript "map" est ici très utile afin de créér rapidement de multiples lignes pour chaque personnage récupéré
 //Afin de proposer des liens dynamiques, on va utiliser le nom de chaque personnage afin de l'insérer dans l'url, pour cela on transformera tous les espaces en traits d'unions
 function CharacterList () {
+
+    const [state, setState] = useState({
+        filterText : ""
+    })
+
     const [loading, characterCards] = useFetch('https://myheroacademiaapi.com/api/character?affiliation=U.A')
 
     if(loading) return 'Page is loading ...'
 
+
+
+    function textFilterChanged(e){
+        setState({
+            filterText : e.target.value
+        })
+    }
+
+    function sortCharacter() {
+
+    }
+
     return (
-        <ul className="characterList row gx-4 gy-4">
-            {characterCards.map( characterCard => <li className="col-12 col-md-6 col-lg-4 position-relative" key = {characterCard.id} id={`character-${characterCard.id}`} >
-                <Link  to={`/${characterCard.name.replace(' ', '-')}`}>
-                    <img className="position-relative" src={characterCard.pictures[Math.floor(Math.random() * (characterCard.pictureNumber - 0 + 1))]} alt={characterCard.name}/>
-                    <h2 className="character-name position-absolute border-bottom" >{characterCard.name}</h2>
-                </Link>
-            </li>)}
-        </ul>
+        <React.Fragment>
+            <SearchCharacter filterText = {state.filterText} textFilterChanged = {(e) => textFilterChanged(e)} />
+            <ul className="characterList row gx-4 gy-4">
+                <CharacterCards
+                    characterCards = {characterCards}
+                />
+            </ul>
+        </React.Fragment>
     )
 }
 
@@ -133,7 +167,7 @@ function CharacterDetail () {
                     {characterFound[0].pictures.map((characterPic, i) => <li className="col-12 col-sm-6 col-lg-4 gx-5 gy-5" key={i}><img src={characterPic} alt=""/></li>)}
                 </ul>
             </article>
-            < BackButton />
+            <BackButton />
         </main>
     )
 }

@@ -5,11 +5,6 @@ function dynamicDisplay () {
         window.location.pathname !== "/" ? document.getElementById('header-searchBar').className = "d-none" : document.getElementById('header-searchBar').className = "form-control rounded-pill" ;
 }
 
-function filterTextChanged (filterText = "") {
-
-    const textFiltered = filterText
-    return textFiltered
-}
 
 function SearchBar() {
 
@@ -21,18 +16,13 @@ function SearchBar() {
         setState({
             filterText : e.target.value
         })
-
-        //Ici on modifiera l'affichage du tableau de personnages avant de le renvoyer au main
-
     }
-
-    filterTextChanged(state.filterText)
 
     function handlePopMySearchBar() {
         const filterButton = document.getElementById("app-responsive-searchbar");
-        const logo = document.getElementById("headerLogo");
+        const logo = document.getElementById("headerLogo")
         const searchBar = document.getElementById("searchBar")
-        logo.classList.toggle("d-none");
+        logo.classList.toggle("d-none")
         filterButton.classList.toggle("offset-7")
         searchBar.classList.toggle("d-none")
     }
@@ -50,7 +40,7 @@ function SearchBar() {
                 </button>
             </div>
         </React.Fragment>
-        )
+    )
 }
 
-export {filterTextChanged, SearchBar, dynamicDisplay}
+export {SearchBar, dynamicDisplay}
