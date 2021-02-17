@@ -73,13 +73,24 @@ function useFetch (url) {
 }
 
 function SearchCharacter (props) {
-    return <input id="header-searchBar" value={props.filterText} type="text" placeholder= "search for a hero" onChange={props.textFilterChanged} />
+    return (
+        <input id="header-searchBar" value={props.filterText} type="text" placeholder= "search for a hero" onChange={props.textFilterChanged} />
+    )
 }
 
 function CharacterCards (props) {
+
+    let filteredCharacters = props.characterCards
+
+    if(props.filterText !== ""){
+        filteredCharacters = filteredCharacters.filter(filteredCharacter => 
+            filteredCharacter.name.toLowerCase().indexOf(props.filterText.toLowerCase()) !== -1)
+        console.log("your fuckin' array : ", filteredCharacters)
+    }
+
     return (
     <React.Fragment>
-        {props.characterCards.map( characterCard =><li className="col-12 col-md-6 col-lg-4 position-relative" key = {characterCard.id} id={`character-${characterCard.id}`} >
+        {filteredCharacters.map( characterCard =><li className="col-12 col-md-6 col-lg-4 position-relative" key = {characterCard.id} id={`character-${characterCard.id}`} >
             <Link  to={`/${characterCard.name.replace(' ', '-')}`}>
                 <img className="position-relative" src={characterCard.pictures[Math.floor(Math.random() * (characterCard.pictureNumber - 0 + 1))]} alt={characterCard.name}/>
                 <h2 className="character-name position-absolute border-bottom" >{characterCard.name}</h2>
@@ -110,16 +121,13 @@ function CharacterList () {
         })
     }
 
-    function sortCharacter() {
-
-    }
-
     return (
         <React.Fragment>
             <SearchCharacter filterText = {state.filterText} textFilterChanged = {(e) => textFilterChanged(e)} />
             <ul className="characterList row gx-4 gy-4">
                 <CharacterCards
                     characterCards = {characterCards}
+                    filterText = {state.filterText}
                 />
             </ul>
         </React.Fragment>
